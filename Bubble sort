@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+void generateArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 1000;
+    }
+}
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+int main() {
+    srand(time(0)); 
+
+    int size;
+    printf("Enter the number of elements: ");
+    scanf("%d", &size);
+    int arr[size];
+    generateArray(arr, size);
+    printf("Unsorted Array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    clock_t start, end;
+    start = clock();
+    bubbleSort(arr, size);
+    end = clock();
+    printf("Sorted Array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time taken for Bubble Sort: %f seconds\n", time_taken);
+
+    return 0;
+}
